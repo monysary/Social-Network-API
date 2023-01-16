@@ -47,10 +47,24 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+// Delete a user
 router.delete('/:id', async (req, res) => {
     try {
         await User.findByIdAndDelete(req.params.id);
         res.status(200).json({ message: 'User deleted!' })
+    } catch (err) {
+        res.status(500).json(err);
+        console.log(err);
+    }
+});
+
+// Add a user to another user's friends list
+router.put('/:userID/friends/:friendID', async (req, res) => {
+    try {
+        await User.findByIdAndUpdate(req.params.userID, {
+            $set: { friends: req.params.friendID }
+        });
+        res.status(200).json({ message: 'User has been added to friends list!' })
     } catch (err) {
         res.status(500).json(err);
         console.log(err);
