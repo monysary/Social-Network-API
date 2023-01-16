@@ -28,8 +28,8 @@ router.get('/:id', async (req, res) => {
 // Post new user
 router.post('/', async (req, res) => {
     try {
-        const users = await User.create(req.body);
-        res.json(users);
+        const user = await User.create(req.body);
+        res.json(user);
     } catch (err) {
         res.status(500).json(err);
         console.log(err);
