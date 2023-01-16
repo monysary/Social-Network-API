@@ -22,7 +22,7 @@ const reactionSchema = new Schema(
         createdAt: {
             type: Date,
             default: date,
-            get: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
+            get: () => `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
         }
     }
 )
@@ -39,7 +39,7 @@ const thoughtSchema = new Schema(
         createdAt: {
             type: Date,
             default: date,
-            get: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
+            get: () => `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
         },
         username: {
             type: String,
@@ -58,8 +58,9 @@ const thoughtSchema = new Schema(
 );
 
 // Setting Thought model's schema's virtual
-thoughtSchema.virtual('reactionCount')
-    .get(() => this.reactions.length);
+thoughtSchema.virtual('reactionCount').get(function() {
+    return this.reactions.length
+});
 
 // Creating Thought model
 const Thought = model('Thought', thoughtSchema);
