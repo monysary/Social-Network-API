@@ -21,8 +21,7 @@ const reactionSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            default: date,
-            get: () => `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
+            default: `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`,
         }
     }
 )
@@ -38,8 +37,7 @@ const thoughtSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            default: date,
-            get: () => `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
+            default: `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`,
         },
         username: {
             type: String,

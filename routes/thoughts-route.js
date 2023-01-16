@@ -34,7 +34,21 @@ router.post('/', async (req, res) => {
                     { new: true }
                 )
             });
-        res.json(thought);
+        res.json({ message: `New thought added under user ID ${req.body.userId}` });
+    } catch (err) {
+        res.status(500).json(err);
+        console.log(err);
+    }
+});
+
+// Update a thought
+
+
+// Delete a thought
+router.delete('/:id', async (req, res) => {
+    try {
+        await Thought.findByIdAndDelete(req.params.id);
+        res.status(200).json({ message: 'Thought deleted!' })
     } catch (err) {
         res.status(500).json(err);
         console.log(err);
