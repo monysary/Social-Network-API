@@ -62,7 +62,7 @@ router.delete('/:id', async (req, res) => {
 router.put('/:userID/friends/:friendID', async (req, res) => {
     try {
         await User.findByIdAndUpdate(req.params.userID, {
-            $set: { friends: req.params.friendID }
+            $push: { friends: req.params.friendID }
         });
         res.status(200).json({ message: 'User has been added to friends list!' })
     } catch (err) {
@@ -70,5 +70,18 @@ router.put('/:userID/friends/:friendID', async (req, res) => {
         console.log(err);
     }
 });
+
+// Delete a user from another user's friends list
+router.delete('/:userID/friends/:friendID', async (req, res) => {
+    try {
+        await User.findByIdAndUpdate(req.params.userID, {
+            $pull: { friends: req.params.friendID }
+        });
+        res.status(200).json({ message: 'User has been removed from friends list!' })
+    } catch (err) {
+        res.status(500).json(err);
+        console.log(err);
+    }
+})
 
 module.exports = router;
