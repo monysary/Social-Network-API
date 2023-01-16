@@ -21,6 +21,9 @@ const reactionSchema = new Schema(
             type: String,
             default: moment().format('MMMM Do YYYY, h:mm:ss a')
         }
+    },
+    {
+        _id: false
     }
 )
 

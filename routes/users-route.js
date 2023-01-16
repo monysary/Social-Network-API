@@ -59,7 +59,7 @@ router.delete('/:id', async (req, res) => {
 });
 
 // Add a user to another user's friends list
-router.put('/:userID/friends/:friendID', async (req, res) => {
+router.post('/:userID/friends/:friendID', async (req, res) => {
     try {
         await User.findByIdAndUpdate(req.params.userID, {
             $push: { friends: req.params.friendID }

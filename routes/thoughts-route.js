@@ -63,4 +63,17 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
+// Add a reaction to Thought reactions array
+router.post('/:thoughtId/reactions', async (req, res) => {
+    try {
+        await Thought.findByIdAndUpdate(req.params.thoughtId, {
+            $push: { reactions: req.body }
+        });
+        res.status(200).json({ message: 'Reaction added to thought!' })
+    } catch (err) {
+        res.status(500).json(err);
+        console.log(err);
+    }
+})
+
 module.exports = router;
