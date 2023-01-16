@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const { User } = require('../models');
+
+const { User, Thought } = require('../models');
 
 // Get all users
 router.get('/', async (req, res) => {
@@ -50,9 +51,10 @@ router.put('/:id', async (req, res) => {
 // Delete a user
 router.delete('/:id', async (req, res) => {
     try {
-        const deletedUser = await User.findById(req.params.id);
-        
-        await User.findByIdAndDelete(req.params.id);
+        await User.findByIdAndDelete(req.params.id)
+            .then((deletedUser) => {
+                return Thought.deleteMany({ _id: { $in: deletedUser.thoughts } })
+            });
         res.status(200).json({ message: 'User deleted!' })
     } catch (err) {
         res.status(500).json(err);

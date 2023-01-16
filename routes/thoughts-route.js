@@ -55,15 +55,14 @@ router.put('/:id', async (req, res) => {
 // Delete a thought
 router.delete('/:id', async (req, res) => {
     try {
-        await Thought.findById(req.params.id)
+        await Thought.findByIdAndDelete(req.params.id)
             .then((deletedThought) => {
-                User.findOneAndUpdate(
+                return User.findOneAndUpdate(
                     { username: deletedThought.username },
                     { $pull: { thoughts: req.params.id } }
-                );
+                )
             })
-        await Thought.findByIdAndDelete(req.params.id)
-        res.status(200).json({ message: 'Thought deleted!' })
+        res.status(200).json({ message: 'Thought deleted!' });
     } catch (err) {
         res.status(500).json(err);
         console.log(err);
