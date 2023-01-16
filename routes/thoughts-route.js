@@ -80,6 +80,19 @@ router.post('/:thoughtId/reactions', async (req, res) => {
         res.status(500).json(err);
         console.log(err);
     }
-})
+});
+
+// Delete a reaction
+router.delete('/:thoughtId/reactions', async (req, res) => {
+    try {
+        await Thought.findByIdAndUpdate(req.params.thoughtId, {
+            $pull: { reactions: { reactionId: req.body.reactionId } }
+        });
+        res.status(200).json({ message: 'Reaction deleted!' })
+    } catch (err) {
+        res.status(500).json(err);
+        console.log(err);
+    }
+});
 
 module.exports = router;
