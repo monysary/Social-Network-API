@@ -1,9 +1,6 @@
 const { model, Schema, Types } = require('mongoose');
 const moment = require('moment');
 
-// Defining current date variable
-const date = new Date()
-
 // Creating reaction sub document for thought schema
 const reactionSchema = new Schema(
     {
