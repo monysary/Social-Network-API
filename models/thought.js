@@ -1,4 +1,5 @@
 const { model, Schema, Types } = require('mongoose');
+const moment = require('moment');
 
 // Defining current date variable
 const date = new Date()
@@ -20,8 +21,8 @@ const reactionSchema = new Schema(
             required: true
         },
         createdAt: {
-            type: Date,
-            default: `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`,
+            type: String,
+            default: moment().format('MMMM Do YYYY, h:mm:ss a')
         }
     }
 )
@@ -36,8 +37,8 @@ const thoughtSchema = new Schema(
             maxLength: 280
         },
         createdAt: {
-            type: Date,
-            default: `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`,
+            type: String,
+            default: moment().format('MMMM Do YYYY, h:mm:ss a')
         },
         username: {
             type: String,

@@ -14,7 +14,3 @@ db.once('open', () => {
         console.log(`App listening on localhost://${PORT}`);
     })
 })
-
-const date = new Date();
-
-console.log(Date.now);
