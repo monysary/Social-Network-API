@@ -18,7 +18,7 @@ node server.js
 ```
 This will open a local host connection and allow users to perform basic CRUD on users and thoughts. User models can store an array of thoughts and other user's ID in the form of a friends list array. A video demonstration on how the back-end works can be found below:
 
-Demo video: 
+Demo video: https://drive.google.com/file/d/1z9_6pZC_wg70N1DfeGhQxqIxTqYxTKbD/view
 
 ## Credits
 N/A
